@@ -5,7 +5,7 @@ import Navbar from '../../Navbar/Navbar';
 import { homeObj } from './Data';
 
 
-function Home() {
+function Welcome() {
     return (
         <>
             <Navbar />
@@ -16,4 +16,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Welcome;
