@@ -17,7 +17,7 @@ const Form = () => {
             <div className='form-container'>
                 <span className='close-btn'>×</span>
                 <div className='form-content-left'>
-                    <img className='form-img' src='../yale_logo.png' alt='ypool logo' />
+                    <img className='form-img' src='../images/yale_logo.png' alt='ypool logo' />
                 </div>
                 {!isSubmitted ? (
                     <FormSignup submitForm={submitForm} />
