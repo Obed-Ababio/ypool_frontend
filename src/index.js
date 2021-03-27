@@ -6,7 +6,6 @@ import App from './App';
 
 
 ReactDOM.render(
-
-    <App />,
+    <App flask_token={document.getElementById('root').getAttribute('flask_token')}/>,
 document.getElementById('root'));
 

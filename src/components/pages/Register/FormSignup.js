@@ -2,6 +2,8 @@ import React from 'react';
 import validate from './validateInfo';
 import useForm from './useForm';
 import './Form.css';
+import Countries from '../test';
+
 
 const FormSignup = ({ submitForm }) => {
     const { handleChange, handleSubmit, values, errors } = useForm(
@@ -14,33 +16,22 @@ const FormSignup = ({ submitForm }) => {
             <form onSubmit={handleSubmit} className='form' noValidate>
                 <h1>
                     Resgister by filling the information below!
-        </h1>
-                <div className='form-inputs'>
-                    <label className='form-label'>Net ID</label>
-                    <input
-                        className='form-input'
-                        type='text'
-                        name='netId'
-                        placeholder='Enter your Net ID'
-                        value={values.netId}
-                        onChange={handleChange}
-                    />
-                    {errors.netId && <p>{errors.netId}</p>}
-                </div>
+                </h1>
                 <div className='form-inputs'>
                     <label className='form-label'>First Name</label>
                     <input
                         className='form-input'
                         type='text'
                         name='first_name'
-                        placeholder='Enter your Full Name'
+                        placeholder='Enter your First Name'
                         value={values.first_name}
                         onChange={handleChange}
                     />
                     {errors.first_name && <p>{errors.first_name}</p>}
                 </div>
+                
                 <div className='form-inputs'>
-                    <label className='form-label'>Full Name</label>
+                    <label className='form-label'>Last Name</label>
                     <input
                         className='form-input'
                         type='text'

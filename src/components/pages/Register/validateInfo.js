@@ -1,12 +1,6 @@
 export default function validateInfo(values) {
     let errors = {};
 
-    if (!values.netId.trim()) {
-        errors.netId = 'Net ID required';
-    } else if (!/^[a-z0-9]+/.test(values.netId.trim())) {
-        errors.netId = 'Enter a valid NetID';
-    }
-
     if (!values.first_name.trim()) {
         errors.first_name = 'First Name required';
     } else if (!/^[A-Za-z]+/.test(values.first_name.trim())) {
