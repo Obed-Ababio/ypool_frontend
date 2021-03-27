@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterContainer } from '../../../containers/footer';
-import {Button} from '/Users/shawtylow/Documents/Spring Semester 2021/SWE/ypool_frontend/src/components/Button'
+import {Button} from '../../Button'
 import Navbar from '../../Navbar/Navbar';
 import './Dashboard.css';
 import { useHistory } from "react-router-dom";
