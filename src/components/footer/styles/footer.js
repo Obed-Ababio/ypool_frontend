@@ -2,11 +2,17 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 60px 60px 60px;
-background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgba(73,63,252,1) 100%);
+  background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgba(73,63,252,1) 100%);
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
 `;
+
+// background: linear - gradient(
+//   90deg,
+//   rgb(39, 176, 255) 0 %,
+//   rgb(0, 232, 236) 100 %
+//   );
 
 export const Wrapper = styled.div`
     display: flex;

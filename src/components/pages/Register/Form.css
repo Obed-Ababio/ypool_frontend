@@ -20,18 +20,14 @@
 }
 
 .form-content-left {
-  background: linear-gradient(
-      90deg, 
-      rgb(110, 94, 254) 0%, 
-      rgba(73,63,252,1) 100%
-    );
+  background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgba(73,63,252,1) 100%);
   border-radius: 10px 0 0 10px;
   position: relative;
 }
 
 .form-img {
-  width: 60%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -119,11 +115,7 @@
   height: 50px;
   margin-top: 10px;
   border-radius: 2px;
-  background: linear-gradient(
-      90deg, 
-      rgb(110, 94, 254) 0%, 
-      rgba(73,63,252,1) 100%
-    );
+  background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgba(73,63,252,1) 100%);
   outline: none;
   border: none;
   color: #fff;
@@ -153,10 +145,3 @@
   color: #27cdff;
   font-weight: 600;
 }
-
-@media screen and (max-width: 960px) {
-    .form-content-left {
-        display: none; 
-    };
-    
-};
