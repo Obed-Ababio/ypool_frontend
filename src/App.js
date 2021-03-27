@@ -8,6 +8,7 @@ import Welcome from './components/pages/Welcome/Welcome';
 import RegistrationForm from './components/pages/Register/RegistrationForm';
 import RequestForm from './components/pages/Request/RequestForm';
 import Dashboard from './components/pages/Dashboard/Dashboard';
+import RideStatus from './components/pages/RideStatus/RideStatus'
 import './App.css';
 
 
@@ -21,6 +22,7 @@ class App extends Component {
               <Route path='/welcome' exact component={Welcome} />
               <Route path='/register' exact component={RegistrationForm} />
               <Route path='/request' exact component={RequestForm} />
+              <Route path='/ridestatus' exact component={RideStatus} />
             </Switch>
         </Router>
       </div>
