@@ -3,7 +3,6 @@ import { FooterContainer } from '../../../containers/footer';
 import {Button} from '/Users/shawtylow/Documents/Spring Semester 2021/SWE/ypool_frontend/src/components/Button'
 import Navbar from '../../Navbar/Navbar';
 import './Dashboard.css';
-import axios from 'axios';
 import { useHistory } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -16,6 +15,10 @@ const ProfilePage = () => {
         e.preventDefault();
         history.push('welcome')
     }
+    const GoToStatus = (e) =>{
+        e.preventDefault();
+        history.push('ridestatus')
+    }
     return (
         <>  <Navbar />
             <div className='home__profile-section'>
@@ -27,7 +30,7 @@ const ProfilePage = () => {
                                 <Button onClick={GoToRequest}>Request A Ride</Button>
                             </th>
                             <th>
-                                <Button>Ride Status</Button> {/*We're gonna need an api call here. not where*/}
+                                <Button onClick={GoToStatus}>Ride Status</Button> {/*We're gonna need an api call here. not where*/}
                             </th>
                             <th>
                                 <Button onClick={Logout}>Logout</Button> {/*There's some logout of cas thing here idk how to do*/}
