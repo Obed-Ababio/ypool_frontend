@@ -5,10 +5,11 @@ import './Form.css';
 import Countries from '../test';
 
 
-const FormSignup = ({ submitForm }) => {
+const FormSignup = (props) => {
     const { handleChange, handleSubmit, values, errors } = useForm(
-        submitForm,
-        validate
+        props.submitForm,
+        validate,
+        props.netId
     );
 
     return (

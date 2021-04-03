@@ -6,7 +6,7 @@ import FormSignup from './FormSignup';
 import FormSuccess from './FormSuccess';
 
 
-const Form = () => {
+const Form = (props) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     function submitForm() {
@@ -19,7 +19,7 @@ const Form = () => {
                     <img className='form-img' src='../images/yale_logo.png' alt='ypool logo' />
                 </div>
                 {!isSubmitted ? (
-                    <FormSignup submitForm={submitForm} />
+                    <FormSignup submitForm={submitForm} netId={props.netId} />
                 ) : (
                     <FormSuccess />
                 )}

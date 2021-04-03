@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, netId) => {
     const [values, setValues] = useState({
-        netId: 'none',
+        netId: 'some_string',
         first_name: '',
         last_name: '',
         email: ''
@@ -21,9 +21,6 @@ const useForm = (callback, validate) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-
-
-
         setErrors(validate(values));
         setIsSubmitting(true);
         axios.post("https://yalepool.com/users", values)

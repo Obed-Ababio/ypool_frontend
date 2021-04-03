@@ -15,18 +15,15 @@ import FlavorForm from './components/pages/test';
 
 
 const App = ({flask_token}) => {
+  console.log({flask_token});
     return (
-      
       <div className="App">
-        <div>
-          <h1>Hello {flask_token}</h1>
-        </div>
         <Router>
             <Switch>
               <Route path='/' exact component={Dashboard} />
               <Route path='/welcome' exact component={Welcome} />
-              <Route path='/register' exact component={RegistrationForm} />
-              <Route path='/request' exact component={RequestForm} />
+              <Route path='/register' exact  render={() => <RegistrationForm netId={flask_token}/>}/>
+              <Route path='/request' exact render={() => <RequestForm netId={flask_token}/>}/>
               <Route path='/ridestatus' exact component={RideStatus} />
               <Route path='/test' exact Component={FlavorForm} />
             </Switch>

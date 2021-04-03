@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, netId) => {
+    console.log(netId);
     const [values, setValues] = useState({
-        fullname: '',
-        email: '',
-        destination: '',
+        netId: netId,
         date: '',
-        time: ''
+        time: '',
+        origin: '',
+        destination: '',
+        preferred_car_type: '',
+        preferred_group_size: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,11 +23,20 @@ const useForm = (callback, validate) => {
         });
     };
 
-    const handleSubmit = event => {
-        event.preventDefault();
+    const handleSubmit = e => {
+        e.preventDefault();
 
-        setErrors(validate(values));
+        //setErrors(validate(values));
         setIsSubmitting(true);
+        console.log(values);
+        axios.post("https://yalepool.com/ride-request", values)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     };
 
     useEffect(

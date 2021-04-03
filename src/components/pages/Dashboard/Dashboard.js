@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterContainer } from '../../../containers/footer';
-import {Button} from '../../Button'
+import {Button} from '../../Button/Button'
 import Navbar from '../../Navbar/Navbar';
 import './Dashboard.css';
 import { useHistory } from "react-router-dom";
@@ -27,13 +27,13 @@ const ProfilePage = () => {
                     <tbody>
                         <tr>
                             <th>
-                                <Button onClick={GoToRequest}>Request A Ride</Button>
+                                <Button buttonSize='btn--large' buttonColor='blue' onClick={GoToRequest}>Request A Ride</Button>
                             </th>
                             <th>
-                                <Button onClick={GoToStatus}>Ride Status</Button> {/*We're gonna need an api call here. not where*/}
+                                <Button buttonSize='btn--large' buttonColor='blue' onClick={GoToStatus}>Ride Status</Button> {/*We're gonna need an api call here. not where*/}
                             </th>
                             <th>
-                                <Button onClick={Logout}>Logout</Button> {/*There's some logout of cas thing here idk how to do*/}
+                                <Button buttonSize='btn--large' buttonColor='blue' onClick={Logout}>Logout</Button> {/*There's some logout of cas thing here idk how to do*/}
                             </th>
                         </tr>
                     </tbody>
