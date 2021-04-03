@@ -4,7 +4,7 @@ import useForm from './useForm';
 import './Form.css';
 import Countries from '../test';
 import FavouriteTeam from '../testrender';
-import Select from 'react-select';
+//import Select from 'react-select';
 
 const FormSignup = (props) => {
     const { handleChange, handleSubmit, values, errors } = useForm(

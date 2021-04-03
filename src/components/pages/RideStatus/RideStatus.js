@@ -25,7 +25,7 @@ function createMatchTable(matches){
                                     <h2>{trip.destination}</h2>
                                 </td>
                                 <td style={{borderRight: "1px solid blue", width: "700px"}}>
-                                    <h3>{trip.date}</h3>
+                                    <h3>{trip.date} at {trip.time}</h3>
                                     <h4>Preferred Car Type: {trip.preferred_car_type}</h4>
                                 </td>
                                 <td style={{textAlign:"center"}}>
@@ -44,7 +44,7 @@ function createMatchTable(matches){
     }
     else{
         return(
-            <h2>No trips pending match!</h2>
+            <h3 style={{textAlign:"center"}}>No Matches Yet</h3>
         )
     }
 }
@@ -68,7 +68,7 @@ function NotMatchedTrips(notMatched) {
                                     <h2>{trip.destination}</h2>
                                 </td>
                                 <td style={{borderRight: "1px solid blue", width: "700px"}}>
-                                    <h3>{trip.date}</h3>
+                                    <h3>{trip.date} at {trip.time}</h3>
                                     <h4>Preferred Car Type: {trip.preferred_car_type}</h4>
                                 </td>
                                 <td style={{textAlign:"center"}}>
