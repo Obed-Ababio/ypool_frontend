@@ -103,13 +103,14 @@ function NotMatchedTrips(notMatched) {
     }
 }
 
-const RideStatus = () => {
+const RideStatus = (props) => {
+    console.log(props)
     const [data, setData] = useState([]);
 
     useEffect(() =>{
         let mounted = true;
-        let data = {'netId': 'abc12334'}
-        axios.post("https://is376m6q9a.execute-api.us-east-1.amazonaws.com/dev/get-request-status", data)
+        let data = {'netId': props.netId}
+        axios.post("https://yalepool.com/get-request-status", data)
             .then(response => {
                 if(mounted){
                     setData(response.data)
@@ -133,7 +134,6 @@ const RideStatus = () => {
     })
     return(
         <div>
-        
             <Navbar />
                 <div style={{alignItems:"center", paddingLeft: "200px", paddingRight: "200px", paddingTop: "40px", paddingBottom: "64px"}}>
                     <h1 style={{textAlign:"left", paddingBottom:"10px"}}>Matches</h1>

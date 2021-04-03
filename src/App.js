@@ -27,7 +27,7 @@ const App = ({flask_token}) => {
               <Route path='/welcome' exact component={Welcome} />
               <Route path='/register' exact component={RegistrationForm} />
               <Route path='/request' exact component={RequestForm} />
-              <Route path='/ridestatus' exact component={RideStatus} />
+              <Route path='/ridestatus' exact render={()=> <RideStatus netId={flask_token}/>} />
               <Route path='/test' exact Component={FlavorForm} />
             </Switch>
         </Router>
