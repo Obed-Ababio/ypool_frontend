@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useForm = (callback, validate, netId) => {
     const [values, setValues] = useState({
-        netId: 'some_string',
+        netId: netId,
         first_name: '',
         last_name: '',
         email: ''
