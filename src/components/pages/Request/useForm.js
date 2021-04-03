@@ -26,9 +26,9 @@ const useForm = (callback, validate, netId) => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        //setErrors(validate(values));
+        setErrors(validate(values));
         setIsSubmitting(true);
-        console.log(values);
+        //console.log(values);
         axios.post("https://yalepool.com/ride-request", values)
             .then(response => {
                 console.log(response)

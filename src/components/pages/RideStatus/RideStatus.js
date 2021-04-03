@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { FooterContainer } from '../../../containers/footer';
 import Navbar from '../../Navbar/Navbar';
 import axios from 'axios';
+import {Button} from '../../Button/Button';
 import { useHistory } from "react-router-dom";
+import './RideStatus.css';
+
+//Matched
+    //ideally click here to view members
+    //need to show who matched with, names and emails, check your email!
+//Awaitng Match
 
 function createMatchTable(matches){
     if(matches.length != 0){
         return(
             <div>
             {matches.map(trip =>
-                <table style={{border: "1px solid blue"}}>
+                <table style={{border: "1px solid blue"}} key={trip.groupId}>
                     <tbody>
                         <tr key={trip.groupId}>
                                 <td style={{textAlign:"center", paddingRight:"50px"}}>
@@ -42,10 +49,15 @@ function createMatchTable(matches){
     }
 }
 
-function notMatchedTrips(notMatched) {
+function NotMatchedTrips(notMatched) {
+    const history = useHistory();
+    const GoToRequest = (e) =>{
+        e.preventDefault();
+        history.push('request')
+    }
     if(notMatched.length != 0){
         return (
-            <div>
+            <div key={-1}>
             {notMatched.map(trip =>
                 <table style={{border: "1px solid blue"}}>
                     <tbody>
@@ -75,17 +87,30 @@ function notMatchedTrips(notMatched) {
     }
     else{
         return(
+            <div>
             <h3 style={{textAlign:"center"}}>No Trips Awaiting Match</h3>
+            <table className='center_table' key={-1}>
+                <tbody>
+                    <tr>
+                        <th>
+                        <Button onClick={GoToRequest}>Click Here To Request A Ride</Button>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
         )
     }
 }
 
-const RideStatus = () => {
+const RideStatus = (props) => {
+    console.log(props)
     const [data, setData] = useState([]);
 
     useEffect(() =>{
         let mounted = true;
-        axios.get("https://is376m6q9a.execute-api.us-east-1.amazonaws.com/dev/get-request-status")
+        let data = {'netId': props.netId}
+        axios.post("https://yalepool.com/get-request-status", data)
             .then(response => {
                 if(mounted){
                     setData(response.data)
@@ -109,17 +134,13 @@ const RideStatus = () => {
     })
     return(
         <div>
-        
             <Navbar />
                 <div style={{alignItems:"center", paddingLeft: "200px", paddingRight: "200px", paddingTop: "40px", paddingBottom: "64px"}}>
-                    <h1 style={{textAlign:"left", paddingBottom:"10px"}}>Pending Approval</h1>
+                    <h1 style={{textAlign:"left", paddingBottom:"10px"}}>Matches</h1>
                     {createMatchTable(matched)}
                     <hr/>
                     <h1 style={{textAlign:"left"}}>Awaiting Match</h1>
-                    {notMatchedTrips(notMatched)}
-                    <hr/>
-                    <h1 style={{textAlign:"left"}}>Past Trips</h1>
-                    <hr/>
+                    {NotMatchedTrips(notMatched)}
                 </div>
             <FooterContainer />
         </div>
