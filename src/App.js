@@ -20,8 +20,8 @@ const App = ({flask_token}) => {
       <div className="App">
         <Router>
             <Switch>
-              <Route path='/' exact component={Dashboard} />
-              <Route path='/welcome' exact component={Welcome} />
+              <Route path='/' exact component={Welcome} />
+              <Route path='/home' exact component={Dashboard} />
               <Route path='/register' exact  render={() => <RegistrationForm netId={flask_token}/>}/>
               <Route path='/request' exact render={() => <RequestForm netId={flask_token}/>}/>
               <Route path='/ridestatus' exact render={()=> <RideStatus netId={flask_token}/>} />

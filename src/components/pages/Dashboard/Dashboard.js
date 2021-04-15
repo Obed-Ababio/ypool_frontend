@@ -13,7 +13,7 @@ const ProfilePage = () => {
     }
     const Logout = (e) =>{
         e.preventDefault();
-        history.push('welcome')
+        history.push('')
     }
     const GoToStatus = (e) =>{
         e.preventDefault();
