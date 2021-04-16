@@ -14,7 +14,7 @@ const ProfilePage = () => {
   };
   const Logout = (e) => {
     e.preventDefault();
-    history.push("");
+    history.push("/cas/logout");
   };
   const GoToStatus = (e) => {
     e.preventDefault();
