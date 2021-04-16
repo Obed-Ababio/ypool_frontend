@@ -43,11 +43,9 @@ function HeroSection({
                 >
                   {description}
                 </p>
-                <Link to="/home">
-                  <Button buttonSize="btn--large" buttonColor="blue">
-                    {buttonLabel}
-                  </Button>
-                </Link>
+                <a rel="noopener noreferrer" target="_self" href="https://yalepool.com/home"><Button buttonSize="btn--large" buttonColor="blue">
+                  {buttonLabel}
+                </Button></a>
               </div>
             </div>
             <div className="col">

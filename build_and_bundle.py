@@ -5,7 +5,7 @@ import re
 # subprocess.run("npm install react-router-dom", shell=True, check=True)
 # subprocess.run("npm install", shell=True, check=True)
 # # make the build
-# subprocess.run("npm run build", shell=True, check=True)
+subprocess.run("npm run build", shell=True, check=True)
 
 subprocess.run("rm -rf /Users/jaredtruong/Desktop/Spring2021/ypool/git/ypool_backend/flask-server/build", shell=True)
 subprocess.run("cp -r build /Users/jaredtruong/Desktop/Spring2021/ypool/git/ypool_backend/flask-server/", shell=True)

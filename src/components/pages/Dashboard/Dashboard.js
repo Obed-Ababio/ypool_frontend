@@ -14,7 +14,7 @@ const ProfilePage = () => {
   };
   const Logout = (e) => {
     e.preventDefault();
-    history.push("/cas/logout");
+    history.push("");
   };
   const GoToStatus = (e) => {
     e.preventDefault();
@@ -50,13 +50,9 @@ const ProfilePage = () => {
                 {/*We're gonna need an api call here. not where*/}
               </th>
               <th>
-                <Button
-                  buttonSize="btn--large"
-                  buttonColor="blue"
-                  onClick={Logout}
-                >
-                  Logout
-                </Button>{" "}
+                <a rel="noopener noreferrer" target="_self" href="https://yalepool.com/cas/logout"><Button buttonSize="btn--large" buttonColor="blue">
+                    Logout
+                </Button></a>
                 {/*There's some logout of cas thing here idk how to do*/}
               </th>
             </tr>
