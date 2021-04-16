@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 const useForm = (callback, validate, netId) => {
@@ -19,6 +20,8 @@ const useForm = (callback, validate, netId) => {
         });
     };
 
+    const history = useHistory();
+
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
@@ -26,6 +29,7 @@ const useForm = (callback, validate, netId) => {
         axios.post("https://yalepool.com/users", values)
             .then(response => {
                 console.log(response)
+                history.push('/');
             })
             .catch(error => {
                 console.log(error)

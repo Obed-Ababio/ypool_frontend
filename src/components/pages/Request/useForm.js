@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 const useForm = (callback, validate, netId) => {
@@ -15,6 +16,7 @@ const useForm = (callback, validate, netId) => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+
     const handleChange = e => {
         const { name, value } = e.target;
         setValues({
@@ -23,15 +25,18 @@ const useForm = (callback, validate, netId) => {
         });
     };
 
+    const history = useHistory();
+    
     const handleSubmit = e => {
         e.preventDefault();
-
+        
         setErrors(validate(values));
+        console.log(errors);
         setIsSubmitting(true);
-        //console.log(values);
         axios.post("https://yalepool.com/ride-request", values)
             .then(response => {
                 console.log(response)
+                
             })
             .catch(error => {
                 console.log(error)
