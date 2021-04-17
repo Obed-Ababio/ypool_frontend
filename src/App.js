@@ -10,7 +10,8 @@ import testrender from "./components/pages/testrender";
 import FlavorForm from "./components/pages/test";
 import UserRouting from "./components/pages/UserRouting";
 
-const App = ({ flask_token }) => {
+const App = ({ flask_token }, {api_key}) => {
+  console.log({api_key})
   return (
     <div className="App">
       <Router>
