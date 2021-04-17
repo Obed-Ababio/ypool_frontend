@@ -13,6 +13,9 @@ import './App.css';
 import testrender from './components/pages/testrender';
 import FlavorForm from './components/pages/test';
 
+// Now we get a key, api_key
+// when we make a backend call we gotta pass a header
+// header = {'api-key' : api_key}
 
 const App = ({flask_token}) => {
   console.log({flask_token});
