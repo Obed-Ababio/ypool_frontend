@@ -34,7 +34,27 @@ const FormSignup = (props) => {
             value={values.origin}
             onChange={handleChange}
           >
-            {some_list.map(CreateDropdown)}
+            <option selected value="None">
+              None
+            </option>
+            <option value="Yale">Yale</option>
+            <option value="Airport-JFK">John F. Kennedy Airport (JFK)</option>
+            <option value="Airport-EWR">
+              Newark Liberty International Airport (EWR)
+            </option>
+            <option value="Airport-BDL">
+              Bradley International Airport (BDL)
+            </option>
+            <option value="Airport-BOS">
+              Boston Logan International Airport (BOS)
+            </option>
+            <option value="Airport-HVN">Tweed New Haven Airport (HVN)</option>
+            <option value="TrainStation-UnionStationNHV">
+              Union Station (New Haven)
+            </option>
+            <option value="TrainStation-PennStationNYC">
+              Penn Station (New York City)
+            </option>
           </select>
           {errors.origin && <p>{errors.origin}</p>}
         </div>
@@ -48,7 +68,27 @@ const FormSignup = (props) => {
             value={values.destination}
             onChange={handleChange}
           >
-            {some_list.map(CreateDropdown)}
+            <option selected value="None">
+              None
+            </option>
+            <option value="Yale">Yale</option>
+            <option value="Airport-JFK">John F. Kennedy Airport (JFK)</option>
+            <option value="Airport-EWR">
+              Newark Liberty International Airport (EWR)
+            </option>
+            <option value="Airport-BDL">
+              Bradley International Airport (BDL)
+            </option>
+            <option value="Airport-BOS">
+              Boston Logan International Airport (BOS)
+            </option>
+            <option value="Airport-HVN">Tweed New Haven Airport (HVN)</option>
+            <option value="TrainStation-UnionStationNHV">
+              Union Station (New Haven)
+            </option>
+            <option value="TrainStation-PennStationNYC">
+              Penn Station (New York City)
+            </option>
           </select>
           {errors.destination && <p>{errors.destination}</p>}
         </div>

@@ -4,28 +4,32 @@ import Dashboard from "./Dashboard/Dashboard";
 import RegistrationForm from "./Register/RegistrationForm";
 
 const UserRouting = (props) => {
-  var isRegistered = true;
+  const netId = { netId: props.netId };
 
-  console.log(props.apiKey);
-  const headers = {
-    "api-key": props.apiKey,
-  };
+  async function checkRegistered(userNetId) {
+    const headers = {
+      "api-key": "4d982688-df96-43a5-ba14-bbaafcdee7ff",
+    };
 
-  const data = { netId: props.netId };
+    return axios
+      .post("https://yalepool.com/is-registered", userNetId, {
+        headers: headers,
+      })
+      .then((response) => {
+        response = response.data;
+        console.log(response.isRegistered);
+        return response.isRegistered;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-  axios
-    .post("https://yalepool.com/is-registered", data, {
-      headers: headers,
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  let isRegistered = checkRegistered(netId);
 
   return (
     <>
+      {console.log(isRegistered)}
       {isRegistered ? (
         <Dashboard apiKey={props.api_key} netId={props.netId} />
       ) : (
