@@ -10,33 +10,34 @@ import testrender from "./components/pages/testrender";
 import FlavorForm from "./components/pages/test";
 import UserRouting from "./components/pages/UserRouting";
 
-const App = ({ flask_token }) => {
+const App = (props) => {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => <Welcome netId={flask_token} />}
-          />
+          <Route path="/" exact render={() => <Welcome />} />
           <Route
             path="/home"
             exact
-            render={() => <UserRouting netId={flask_token} />}
+            render={() => (
+              <UserRouting apiKey={props.api_key} netId={props.flask_token} />
+            )}
           />
 
           <Route
             path="/request"
             exact
-            render={() => <RequestForm netId={flask_token} />}
+            render={() => (
+              <RequestForm apiKey={props.api_key} netId={props.flask_token} />
+            )}
           />
           <Route
             path="/ridestatus"
             exact
-            render={() => <RideStatus netId={flask_token} />}
+            render={() => (
+              <RideStatus apiKey={props.api_key} netId={props.flask_token} />
+            )}
           />
-          <Route path="/test" exact Component={FlavorForm} />
         </Switch>
       </Router>
     </div>
