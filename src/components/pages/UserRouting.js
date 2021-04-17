@@ -6,8 +6,17 @@ import RegistrationForm from "./Register/RegistrationForm";
 const UserRouting = (props) => {
   var isRegistered = true;
 
+  console.log(props.apiKey);
+  const headers = {
+    "api-key": props.apiKey,
+  };
+
+  const data = { netId: props.netId };
+
   axios
-    .post("https://yalepool.com/is-registered", props.netId)
+    .post("https://yalepool.com/is-registered", data, {
+      headers: headers,
+    })
     .then((response) => {
       console.log(response);
     })
@@ -18,9 +27,9 @@ const UserRouting = (props) => {
   return (
     <>
       {isRegistered ? (
-        <Dashboard netId={props.netId} />
+        <Dashboard apiKey={props.api_key} netId={props.netId} />
       ) : (
-        <RegistrationForm netId={props.netId} />
+        <RegistrationForm apiKey={props.api_key} netId={props.netId} />
       )}
     </>
   );

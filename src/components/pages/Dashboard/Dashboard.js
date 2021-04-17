@@ -5,8 +5,9 @@ import Navbar from "../../Navbar/Navbar";
 import "./Dashboard.css";
 import { useHistory } from "react-router-dom";
 import ResponsiveDrawer from "../Request/Drawer";
+import axios from "axios";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   const history = useHistory();
   const GoToRequest = (e) => {
     e.preventDefault();
