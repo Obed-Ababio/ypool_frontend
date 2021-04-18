@@ -1,6 +1,8 @@
 import React from "react";
 import "./HeroSection.css";
-import { Button } from "./Button/Button";
+//import { Button } from "./Button/Button";
+import Button from "@material-ui/core/Button";
+
 import { Link } from "react-router-dom";
 
 function HeroSection({
@@ -43,9 +45,22 @@ function HeroSection({
                 >
                   {description}
                 </p>
-                <a rel="noopener noreferrer" target="_self" href="https://yalepool.com/home"><Button buttonSize="btn--large" buttonColor="blue">
+                {/* <a
+                  rel="noopener noreferrer"
+                  target="_self"
+                  href="https://yalepool.com/home"
+                >
+                  <Button variant="contained" color="secondary">
+                    {buttonLabel}
+                  </Button>
+                </a> */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="https://yalepool.com/home"
+                >
                   {buttonLabel}
-                </Button></a>
+                </Button>
               </div>
             </div>
             <div className="col">

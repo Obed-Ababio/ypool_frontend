@@ -47,6 +47,8 @@ const useForm = (callback, validate, netId, apiKey) => {
       .catch((error) => {
         console.log(error);
       });
+
+    history.push("/home");
   };
 
   useEffect(() => {

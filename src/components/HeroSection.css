@@ -103,7 +103,7 @@ img {
   }
 
   .home__hero-img-wrapper {
-  max-width: 400px;
-  margin-left: 10px;
-}
+    max-width: 400px;
+    margin-left: 10px;
+  }
 }
