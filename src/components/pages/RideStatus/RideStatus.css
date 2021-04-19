@@ -15,12 +15,6 @@
   padding-left: 67px;
 }
 
-.container {
-  height: 200px;
-  position: relative;
-  border: 3px solid green;
-}
-
 .vertical-center {
   margin: 0;
   position: absolute;
