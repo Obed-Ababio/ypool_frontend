@@ -6,144 +6,275 @@ import {Button} from '../../Button/Button';
 import { useHistory } from "react-router-dom";
 import './RideStatus.css';
 
-//Matched
-    //ideally click here to view members
-    //need to show who matched with, names and emails, check your email!
-//Awaitng Match
+//To Do
+    //Get the request new ride button out
+    //Gonna have to write different table functions for different types of data
 
-function createMatchTable(matches){
-    if(matches.length != 0){
+//api key header
+var header = {'api-key' : '4d982688-df96-43a5-ba14-bbaafcdee7ff'}
+
+function GroupInfo(props) {
+    let groupId = {'groupId' : props.groupId}
+    const [info, setInfo] = useState(null)
+
+    useEffect(() =>{
+        axios.post("https://yalepool.com/get-group-info", groupId, {headers: header})
+            .then(response =>{
+                setInfo(response)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
+    }, [])
+    if(!info){
         return(
-            <div>
-            {matches.map(trip =>
-                <table style={{border: "1px solid blue"}} key={trip.groupId}>
-                    <tbody>
-                        <tr key={trip.groupId}>
-                                <td style={{textAlign:"center", paddingRight:"50px"}}>
-                                    <h2>{trip.origin}</h2>
-                                    <p>-to-</p>
-                                    <h2>{trip.destination}</h2>
-                                </td>
-                                <td style={{borderRight: "1px solid blue", width: "700px"}}>
-                                    <h3>{trip.date} at {trip.time}</h3>
-                                    <h4>Preferred Car Type: {trip.preferred_car_type}</h4>
-                                </td>
-                                <td style={{textAlign:"center"}}>
-                                    <h1>Group Size</h1>
-                                    <h2>{trip.preferred_group_size}</h2>
-                                </td>
-                                <td>
-
-                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-            )}
-            </div>
+            <>
+            </>
         )
     }
     else{
+        let members = info.data.names
+        let departureDate = info.data.departureDate
+        let departureTime = info.data.departureTime
+        let destinations = info.data.destinations
+        let origins = info.data.origins
+        let orgKey = 0
+        let destKey = 0
+        let memKey = 0
         return(
-            <h3 style={{textAlign:"center"}}>No Matches Yet</h3>
+            <>
+                <td className="match_td_right">
+                    <h3>Match Info</h3>
+                    <p>Origins:</p>
+                    {origins.map(org => 
+                        <p key={orgKey++}>{org[0]}</p>
+                    )}
+                    <p>Destinations:</p>
+                    {destinations.map(dest => 
+                        <p key={destKey++}>{dest[0]}</p>
+                    )}
+                    <p>Departure Date: {departureDate}</p>
+                    <p>Departure Time: {departureTime}</p>
+                </td>
+                <td className="match_td">
+                    <h3>Group Members</h3>
+                    {members.map(mem => 
+                        <p key={memKey++}>{mem}</p>
+                    )}
+                </td>
+            </>
         )
     }
+
 }
 
-function NotMatchedTrips(notMatched) {
-    const history = useHistory();
-    const GoToRequest = (e) =>{
-        e.preventDefault();
-        history.push('request')
-    }
-    if(notMatched.length != 0){
-        return (
-            <div key={-1}>
-            {notMatched.map(trip =>
-                <table style={{border: "1px solid blue"}}>
-                    <tbody>
-                        <tr key={trip.groupId}>
-                                <td style={{textAlign:"center", padding:"16px"}}>
-                                    <h2>{trip.origin}</h2>
-                                    <p>-to-</p>
-                                    <h2>{trip.destination}</h2>
-                                </td>
-                                <td style={{borderRight: "1px solid blue", width: "700px"}}>
-                                    <h3>{trip.date} at {trip.time}</h3>
-                                    <h4>Preferred Car Type: {trip.preferred_car_type}</h4>
-                                </td>
-                                <td style={{textAlign:"center"}}>
-                                    <h1>Group Size</h1>
-                                    <h2>{trip.preferred_group_size}</h2>
-                                </td>
-                                <td>
+function DecisionBox(props) {
 
-                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-            )}
-            </div>
-        )
+    let data = {'netId':props.netId, 'requestId':props.requestId}
+    const [result, setResponse] = useState(null)
+
+    function accept(e) {
+        e.preventDefault()
+        axios.post("https://yalepool.com/confirm-match", data, {headers: header})
+            .then(response => {
+                setResponse(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
-    else{
+
+    function decline(e) {
+        e.preventDefault()
+        axios.post("https://yalepool.com/decline-match", data, {headers: header})
+        .then(response => {
+            setResponse(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    if(result){
+        props.update()
+    }
+    if(props.needClick){
         return(
-            <div>
-            <h3 style={{textAlign:"center"}}>No Trips Awaiting Match</h3>
-            <table className='center_table' key={-1}>
+            <table>
                 <tbody>
                     <tr>
-                        <th>
-                        <Button onClick={GoToRequest}>Click Here To Request A Ride</Button>
-                        </th>
+                        <td>
+                            <Button 
+                                buttonSize="btn--small"
+                                buttonColor="blue"
+                                onClick={accept}
+                            >
+                                Accept
+                            </Button>
+                        </td>
+                        <td>
+                            <Button 
+                                buttonSize="btn--small"
+                                buttonColor="blue"
+                                onClick={decline}
+                            >
+                                Decline
+                            </Button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        )
+    }
+    else{
+        return(
+            <div></div>
+        )
+    }
+}
+
+function MatchTable(props) {
+
+
+    let trips = props.trips
+    console.log(trips)
+    if(trips.length !== 0){
+        return(
+            <div>
+                <div className='table_div'>
+                <h1 className='category'>{props.title}</h1>
+                    {trips.map(trip =>
+                    <div style={{paddingBottom: "10px"}}>
+                    <table key={trip.groupId} className="match_table">
+                        <tbody>
+                            <tr>
+                                <td className="match_td_right">
+                                <h3 className="td_title">Request Info</h3> 
+                                <p>{trip.origin} to {trip.destination}</p>
+                                <p>Departure Date: {trip.date}</p>
+                                <p>Preferred Departure Time: {trip.time}</p>
+                                <p>Preferred Group Size: {trip.preferred_group_size}</p>
+                                <p>Preferred Car Type: {trip.preferred_car_type}</p>
+                                </td>
+                                <GroupInfo groupId ={trip.groupId}/>
+                                {props.needClick &&                                 
+                                    <td className="match_td_left">
+                                        <DecisionBox update={props.update} needClick={props.needClick} netId={trip.netId} requestId={trip.requestId}/>
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>)}
+                </div>
+                <hr className="table_hr"/>
+            </div>
+        )
+    }
+    else{
+        return(
+            <div>
             </div>
         )
     }
 }
 
-const RideStatus = (props) => {
-    console.log(props)
-    const [data, setData] = useState([]);
+function WaitingTable(props) {
+    
+    let requests = props.trips
+    if(requests.length != 0){
+        return(
+        <div>
+            <div className='table_div'>
+            <h1 className='category'>{props.title}</h1>
+            {requests.map(request =>
+                <table key={request.groupId} className="match_table">
+                    <tbody>
+                        <tr>
+                            <td className="request_td">
+                                <h3>Request Info</h3> 
+                                <p>{request.origin} to {request.destination}</p>
+                                <p>Departure Date: {request.date}</p>
+                                <p>Preferred Departure Time: {request.time}</p>
+                                <p>Preferred Group Size: {request.preferred_group_size}</p>
+                                <p>Preferred Car Type: {request.preferred_car_type}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>)}
+            </div>
+        </div>
+        )
+    }
+    else{
+        return(
+            <div>
+            </div>
+        )
+    }
+}
 
-    useEffect(() =>{
-        let mounted = true;
-        let data = {'netId': props.netId}
-        axios.post("https://yalepool.com/get-request-status", data)
+function RideStatus(props) {
+
+    const [data, setData] = useState(null)
+
+    function update() {
+        let netId = {'netId': "ds2496"} //normally this is gotten from props
+        axios.post("https://yalepool.com/get-request-status", netId, {headers: header})
             .then(response => {
-                if(mounted){
-                    setData(response.data)
-                }
+                setData(response) //set it!
             })
             .catch(error => {
-                setData(error)
+                console.log(`Error: ${error}`)
             })
-            return () => mounted = false;
+    }
+
+    useEffect(() => {
+        //pass the netid to the api call
+        update()
     }, [])
-    console.log(data)
-    var matched = []
-    var notMatched = []
-    data.forEach(trip => {
-        if(trip.matched){
-            matched.push(trip)
-        }
-        else{
-            notMatched.push(trip)
-        }
-    })
+    //These arrays will hold our types of trips
+    let finalizedGroup = []
+    let awaitingUserConf = []
+    let awaitingOtherConf = []
+    let awaitingMatch = []
+    if(data){
+        data.data.forEach(trip =>{
+            if(trip.allConfirmed){
+                finalizedGroup.push(trip)
+            }
+            else if(trip.confirmed){
+                awaitingOtherConf.push(trip)
+            }
+            else if(trip.matched && !trip.confirmed){
+                awaitingUserConf.push(trip)
+            }
+            else if(!trip.matched){
+                awaitingMatch.push(trip)
+            }
+        })
+    }
+
+    //Give option to request a new ride
+    let history = useHistory()
+    function GoToRequest(e){
+        e.preventDefault()
+        history.push('request')
+    }
+
     return(
         <div>
             <Navbar />
-                <div style={{alignItems:"center", paddingLeft: "200px", paddingRight: "200px", paddingTop: "40px", paddingBottom: "64px"}}>
-                    <h1 style={{textAlign:"left", paddingBottom:"10px"}}>Matches</h1>
-                    {createMatchTable(matched)}
-                    <hr/>
-                    <h1 style={{textAlign:"left"}}>Awaiting Match</h1>
-                    {NotMatchedTrips(notMatched)}
+                <MatchTable trips={finalizedGroup} update={update} title="Confirmed Matches" needClick={false}/>
+                <MatchTable trips={awaitingUserConf} update={update} title="Finalized Matches" needClick={true}/>
+                <MatchTable trips={awaitingOtherConf} update={update} title="Awaiting Others' Confirmation" needClick={false}/>
+                <WaitingTable trips={awaitingMatch} title="Waiting To Be Matched"/>
+                <div className="center_button">
+                <Button buttonColor="blue" onClick={GoToRequest} className="center_button">Click Here To Request A Ride</Button>
                 </div>
-            <FooterContainer />
+            <FooterContainer/>
         </div>
     )
 }
+
 export default RideStatus
