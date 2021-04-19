@@ -11,10 +11,10 @@ import './RideStatus.css';
     //Gonna have to write different table functions for different types of data
 
 //api key header
-var header = {'api-key' : '4d982688-df96-43a5-ba14-bbaafcdee7ff'}
 
 function GroupInfo(props) {
     let groupId = {'groupId' : props.groupId}
+    let header = props.header
     const [info, setInfo] = useState(null)
 
     useEffect(() =>{
@@ -71,6 +71,7 @@ function GroupInfo(props) {
 function DecisionBox(props) {
 
     let data = {'netId':props.netId, 'requestId':props.requestId}
+    let header = props.header
     const [result, setResponse] = useState(null)
 
     function accept(e) {
@@ -137,7 +138,6 @@ function MatchTable(props) {
 
 
     let trips = props.trips
-    console.log(trips)
     if(trips.length !== 0){
         return(
             <div>
@@ -156,10 +156,10 @@ function MatchTable(props) {
                                 <p>Preferred Group Size: {trip.preferred_group_size}</p>
                                 <p>Preferred Car Type: {trip.preferred_car_type}</p>
                                 </td>
-                                <GroupInfo groupId ={trip.groupId}/>
+                                <GroupInfo header={props.header} groupId ={trip.groupId}/>
                                 {props.needClick &&                                 
                                     <td className="match_td_left">
-                                        <DecisionBox update={props.update} needClick={props.needClick} netId={trip.netId} requestId={trip.requestId}/>
+                                        <DecisionBox header={props.header} update={props.update} needClick={props.needClick} netId={trip.netId} requestId={trip.requestId}/>
                                     </td>
                                 }
                             </tr>
@@ -216,10 +216,13 @@ function WaitingTable(props) {
 
 function RideStatus(props) {
 
+    var netId = {'netId' : props.netId}
+    var header = {'api_key': props.apiKey}
+
     const [data, setData] = useState(null)
 
     function update() {
-        let netId = {'netId': "ds2496"} //normally this is gotten from props
+        //pass the netid to the api call
         axios.post("https://yalepool.com/get-request-status", netId, {headers: header})
             .then(response => {
                 setData(response) //set it!
@@ -230,7 +233,6 @@ function RideStatus(props) {
     }
 
     useEffect(() => {
-        //pass the netid to the api call
         update()
     }, [])
     //These arrays will hold our types of trips
@@ -265,10 +267,10 @@ function RideStatus(props) {
     return(
         <div>
             <Navbar />
-                <MatchTable trips={finalizedGroup} update={update} title="Confirmed Matches" needClick={false}/>
-                <MatchTable trips={awaitingUserConf} update={update} title="Finalized Matches" needClick={true}/>
-                <MatchTable trips={awaitingOtherConf} update={update} title="Awaiting Others' Confirmation" needClick={false}/>
-                <WaitingTable trips={awaitingMatch} title="Waiting To Be Matched"/>
+                <MatchTable header={header} trips={finalizedGroup} update={update} title="Confirmed Matches" needClick={false}/>
+                <MatchTable header={header} trips={awaitingUserConf} update={update} title="Finalized Matches" needClick={true}/>
+                <MatchTable header={header} trips={awaitingOtherConf} update={update} title="Awaiting Others' Confirmation" needClick={false}/>
+                <WaitingTable header={header} trips={awaitingMatch} title="Waiting To Be Matched"/>
                 <div className="center_button">
                 <Button buttonColor="blue" onClick={GoToRequest} className="center_button">Click Here To Request A Ride</Button>
                 </div>
